@@ -146,12 +146,12 @@ const Hero: React.FC = () => {
                         transition={{ delay: 0.8 }}
                     >
                         <Button
-                            href="#work"
+                            href="#about"
                             className="primary"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            View Work
+                            About Me
                         </Button>
                         <Button
                             href="#contact"
