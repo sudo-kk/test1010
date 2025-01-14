@@ -4,70 +4,58 @@ import { motion } from 'framer-motion';
 import { Container } from '../styles/StyledComponents';
 
 const HeroSection = styled.section`
-    position: relative;
     width: 100%;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    padding-top: 60px; // Height of navbar
-
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 80px 20px;
+    
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        padding-top: 60px;
-        height: calc(100vh - 60px);
-        overflow-y: auto;
+        min-height: 100vh;
+        padding: 80px 16px;
+        align-items: flex-start;
     }
 `;
 
 const StyledContainer = styled(Container)`
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
-
-    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        padding: 16px;
-        justify-content: flex-start;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const HeroContent = styled(motion.div)`
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    gap: 1rem;
+    gap: 20px;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        gap: 0.75rem;
-        margin-top: 2vh;
+        gap: 16px;
     }
 `;
 
 const Title = styled(motion.h1)`
-    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-size: 5rem;
     font-weight: 700;
     animation: glitch 5s infinite;
     margin: 0;
     padding: 0;
-    width: 100%;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        line-height: 1.2;
-        padding: 0 8px;
+        font-size: 2.5rem;
     }
 `;
 
 const Subtitle = styled(motion.h2)`
-    font-size: clamp(1.5rem, 5vw, 3rem);
+    font-size: 3rem;
     background: linear-gradient(45deg, 
         ${({ theme }) => theme.colors.primary}, 
         ${({ theme }) => theme.colors.secondary}
@@ -77,58 +65,51 @@ const Subtitle = styled(motion.h2)`
     -webkit-text-fill-color: transparent;
     margin: 0;
     padding: 0;
-    width: 100%;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        line-height: 1.3;
-        padding: 0 8px;
+        font-size: 1.75rem;
     }
 `;
 
 const TypingText = styled(motion.p)`
-    font-size: clamp(0.875rem, 3vw, 1.2rem);
+    font-size: 1.2rem;
     line-height: 1.5;
     margin: 0;
-    padding: 0 16px;
+    padding: 0;
     min-height: 3em;
-    width: 100%;
-    max-width: 90%;
+    max-width: 600px;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        max-width: 100%;
-        padding: 0 12px;
+        font-size: 1rem;
+        padding: 0 10px;
     }
 `;
 
 const ButtonContainer = styled(motion.div)`
     display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    width: 100%;
-    padding: 0;
-    margin-top: 1rem;
+    gap: 20px;
+    margin-top: 10px;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         flex-direction: column;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 0 24px;
-        margin-top: 2vh;
+        width: 100%;
+        padding: 0 20px;
+        gap: 12px;
     }
 `;
 
 const Button = styled(motion.a)`
-    padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+    padding: 12px 32px;
     border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
+    font-size: 1rem;
     transition: all 0.3s ease;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 140px;
-    font-size: clamp(0.875rem, 2vw, 1rem);
+    min-width: 150px;
 
     &.primary {
         background: ${({ theme }) => theme.colors.primary};
@@ -148,7 +129,8 @@ const Button = styled(motion.a)`
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         width: 100%;
-        max-width: 200px;
+        padding: 10px 24px;
+        font-size: 0.95rem;
     }
 `;
 
