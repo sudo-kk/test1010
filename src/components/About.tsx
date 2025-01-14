@@ -4,13 +4,13 @@ import { motion } from 'framer-motion';
 import { Container, GlassCard } from '../styles/StyledComponents';
 
 const AboutSection = styled.section`
-    padding: 5rem 0;
+    padding: 3rem 0;
     position: relative;
 `;
 
 const SectionTitle = styled(motion.h2)`
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     font-size: 2.5rem;
 `;
 
