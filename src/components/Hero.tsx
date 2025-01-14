@@ -175,14 +175,14 @@ const Hero: React.FC = () => {
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.2 }}
                     >
-                        Creative
+                        sudo_kk
                     </Title>
                     <Subtitle
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.4 }}
                     >
-                        Developer & Designer
+                        Techie & Cyber Expert
                     </Subtitle>
                     <TypingText
                         initial={{ opacity: 0 }}
