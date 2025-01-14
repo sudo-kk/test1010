@@ -14,10 +14,10 @@ const HeroSection = styled.section`
     overflow: hidden;
     
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        padding: 2rem 0;
+        padding: 0;
         min-height: 100vh;
-        align-items: center;
-        justify-content: flex-start;
+        height: 100vh;
+        align-items: flex-start;
     }
 `;
 
@@ -33,10 +33,11 @@ const HeroContent = styled(motion.div)`
     padding: 0;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        padding: 0 1rem;
-        margin-top: 0;
-        height: 100vh;
-        justify-content: center;
+        padding: 1rem;
+        height: 100%;
+        justify-content: flex-start;
+        margin: 0;
+        padding-top: 4rem;
     }
 `;
 
@@ -50,9 +51,9 @@ const Title = styled(motion.h1)`
     white-space: nowrap;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        font-size: 2.25rem;
-        line-height: 1.2;
-        margin: 0 0 0.5rem 0;
+        font-size: 2rem;
+        line-height: 1.1;
+        margin: 0 0 0.25rem 0;
         white-space: normal;
     }
 `;
@@ -72,9 +73,9 @@ const Subtitle = styled(motion.h2)`
     white-space: nowrap;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        font-size: 1.5rem;
-        line-height: 1.3;
-        margin: 0 0 0.5rem 0;
+        font-size: 1.25rem;
+        line-height: 1.2;
+        margin: 0 0 0.25rem 0;
         white-space: normal;
     }
 `;
@@ -88,11 +89,11 @@ const TypingText = styled(motion.p)`
     padding: 0;
     
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        font-size: 0.9rem;
-        line-height: 1.4;
-        margin: 0.5rem 0;
-        padding: 0 0.5rem;
-        min-height: 2.8em;
+        font-size: 0.85rem;
+        line-height: 1.3;
+        margin: 0.25rem 0;
+        padding: 0;
+        min-height: 2.6em;
         max-width: 100%;
     }
 `;
@@ -108,9 +109,9 @@ const ButtonContainer = styled(motion.div)`
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         flex-direction: column;
         align-items: center;
-        gap: 0.75rem;
-        margin-top: 1rem;
-        padding: 0 1.5rem;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+        padding: 0 1rem;
     }
 `;
 
@@ -145,9 +146,9 @@ const Button = styled(motion.a)`
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         width: 100%;
-        max-width: 250px;
-        padding: 0.625rem 1.25rem;
-        font-size: 0.9rem;
+        max-width: 220px;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
         min-width: unset;
     }
 `;
