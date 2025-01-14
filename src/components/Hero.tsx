@@ -95,21 +95,56 @@ const Button = styled(motion.a)`
 
 const Hero: React.FC = () => {
     const [displayText, setDisplayText] = useState('');
-    const text = portfolioData.subtitle;
+    const phrases = [
+        "Turning ideas into interactive experiences",
+        "Did you know? 95% of cybersecurity breaches are due to human error",
+        "The first computer virus was created in 1983",
+        "The term 'bug' originated from an actual moth in a computer",
+        "The average cost of a data breach is $3.86 million",
+        "There's a new cyber attack every 39 seconds"
+    ];
+    const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const typingSpeed = 50;
+    const deletingSpeed = 30;
+    const pauseTime = 2000;
 
     useEffect(() => {
-        let currentIndex = 0;
-        const interval = setInterval(() => {
-            if (currentIndex <= text.length) {
-                setDisplayText(text.slice(0, currentIndex));
-                currentIndex++;
+        let timeout: ReturnType<typeof setTimeout>;
+        
+        const animateText = () => {
+            const currentPhrase = phrases[currentPhraseIndex];
+            
+            if (!isDeleting) {
+                if (displayText !== currentPhrase) {
+                    // Typing
+                    timeout = setTimeout(() => {
+                        setDisplayText(currentPhrase.slice(0, displayText.length + 1));
+                    }, typingSpeed);
+                } else {
+                    // Pause before deleting
+                    timeout = setTimeout(() => {
+                        setIsDeleting(true);
+                    }, pauseTime);
+                }
             } else {
-                clearInterval(interval);
+                if (displayText === '') {
+                    // Move to next phrase
+                    setIsDeleting(false);
+                    setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+                } else {
+                    // Deleting
+                    timeout = setTimeout(() => {
+                        setDisplayText(displayText.slice(0, -1));
+                    }, deletingSpeed);
+                }
             }
-        }, 100);
+        };
 
-        return () => clearInterval(interval);
-    }, [text]);
+        timeout = setTimeout(animateText, 50);
+
+        return () => clearTimeout(timeout);
+    }, [displayText, isDeleting, currentPhraseIndex]);
 
     return (
         <HeroSection id="home">
@@ -139,6 +174,13 @@ const Hero: React.FC = () => {
                         transition={{ delay: 0.6 }}
                     >
                         {displayText}
+                        <motion.span
+                            animate={{ opacity: [1, 0] }}
+                            transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
+                            style={{ display: 'inline-block', marginLeft: '2px', borderRight: '2px solid currentColor' }}
+                        >
+                            &nbsp;
+                        </motion.span>
                     </TypingText>
                     <ButtonContainer
                         initial={{ opacity: 0 }}
