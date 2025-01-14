@@ -7,8 +7,8 @@ const BackgroundContainer = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 0;
-    pointer-events: none;
+    z-index: -1;
+    pointer-events: auto;
     background-color: ${({ theme }) => theme.colors.background};
     overflow: hidden;
 `;
@@ -60,11 +60,9 @@ const Background: React.FC = () => {
         const glowIntensity = isMobile ? 0.6 : 0.8;
 
         const resizeCanvas = () => {
-            const dpr = window.devicePixelRatio || 1;
             const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width * dpr;
-            canvas.height = rect.height * dpr;
-            ctx.scale(dpr, dpr);
+            canvas.width = rect.width;
+            canvas.height = rect.height;
             canvas.style.width = `${rect.width}px`;
             canvas.style.height = `${rect.height}px`;
         };
@@ -116,19 +114,12 @@ const Background: React.FC = () => {
             particle.x += particle.speedX;
             particle.y += particle.speedY;
 
-            // Improved edge wrapping
-            const viewportHeight = window.innerHeight;
-            const documentHeight = Math.max(
-                document.documentElement.scrollHeight,
-                document.documentElement.offsetHeight,
-                document.documentElement.clientHeight
-            );
-
+            // Wrap around edges
             if (particle.x < -50) particle.x = canvas.width + 50;
             else if (particle.x > canvas.width + 50) particle.x = -50;
 
-            if (particle.y < scrollY - 50) particle.y = scrollY + viewportHeight + 50;
-            else if (particle.y > scrollY + viewportHeight + 50) particle.y = scrollY - 50;
+            if (particle.y < scrollY - 50) particle.y = scrollY + window.innerHeight + 50;
+            else if (particle.y > scrollY + window.innerHeight + 50) particle.y = scrollY - 50;
         };
 
         const animate = () => {
@@ -207,7 +198,6 @@ const Background: React.FC = () => {
         };
 
         const handleTouchStart = (e: TouchEvent) => {
-            e.preventDefault();
             isTouch.current = true;
             const rect = canvas.getBoundingClientRect();
             const touch = e.touches[0];
@@ -218,7 +208,6 @@ const Background: React.FC = () => {
         };
 
         const handleTouchMove = (e: TouchEvent) => {
-            e.preventDefault();
             if (isTouch.current) {
                 const rect = canvas.getBoundingClientRect();
                 const touch = e.touches[0];
@@ -245,8 +234,8 @@ const Background: React.FC = () => {
         window.addEventListener('scroll', handleScroll, { passive: true });
         canvas.addEventListener('mousemove', handleMouseMove);
         canvas.addEventListener('mouseleave', handleMouseLeave);
-        canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
-        canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+        canvas.addEventListener('touchstart', handleTouchStart);
+        canvas.addEventListener('touchmove', handleTouchMove);
         canvas.addEventListener('touchend', handleTouchEnd);
 
         return () => {
