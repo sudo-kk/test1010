@@ -5,15 +5,18 @@ import { Container } from '../styles/StyledComponents';
 
 const HeroSection = styled.section`
     min-height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6rem 1rem 2rem 1rem;
+    padding: 6rem 0 2rem 0;
     position: relative;
+    overflow-x: hidden;
     
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        padding: 4rem 1rem 1rem 1rem;
-        min-height: 90vh;
+        padding: 4rem 0 1rem 0;
+        min-height: 100vh;
+        align-items: flex-start;
     }
 `;
 
@@ -21,24 +24,32 @@ const HeroContent = styled(motion.div)`
     text-align: center;
     width: 100%;
     max-width: 800px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 1rem;
+    padding: 0;
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+        padding: 1rem;
+        margin-top: 2rem;
+    }
 `;
 
 const Title = styled(motion.h1)`
     font-size: 5rem;
     font-weight: 700;
     animation: glitch 5s infinite;
-    width: 100%;
-    margin: 0;
+    margin: 0 0 1rem 0;
     padding: 0;
+    width: 100%;
+    white-space: nowrap;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        font-size: 3rem;
+        font-size: 2.5rem;
         line-height: 1.2;
+        margin: 0 0 0.5rem 0;
     }
 `;
 
@@ -51,14 +62,16 @@ const Subtitle = styled(motion.h2)`
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: 1rem 0;
-    width: 100%;
+    margin: 0 0 1rem 0;
     padding: 0;
+    width: 100%;
+    white-space: nowrap;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        font-size: 2rem;
+        font-size: 1.75rem;
         line-height: 1.3;
-        margin: 0.5rem 0;
+        margin: 0 0 0.5rem 0;
+        white-space: normal;
     }
 `;
 
@@ -67,35 +80,37 @@ const TypingText = styled(motion.p)`
     margin: 1rem 0;
     min-height: 1.5em;
     width: 100%;
-    padding: 0 1rem;
+    max-width: 90%;
+    padding: 0;
     
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         font-size: 1rem;
-        line-height: 1.5;
+        line-height: 1.4;
         margin: 0.5rem 0;
-        padding: 0 0.5rem;
+        padding: 0 1rem;
+        min-height: 2.8em;
     }
 `;
 
 const ButtonContainer = styled(motion.div)`
     margin-top: 2rem;
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: center;
     width: 100%;
-    padding: 0 1rem;
+    padding: 0;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         flex-direction: column;
-        align-items: stretch;
-        gap: 0.75rem;
+        align-items: center;
+        gap: 1rem;
         margin-top: 1.5rem;
-        padding: 0 0.5rem;
+        padding: 0 2rem;
     }
 `;
 
 const Button = styled(motion.a)`
-    padding: 1rem 2rem;
+    padding: 0.875rem 2rem;
     border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
@@ -104,7 +119,8 @@ const Button = styled(motion.a)`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 150px;
+    min-width: 160px;
+    font-size: 1rem;
 
     &.primary {
         background: ${({ theme }) => theme.colors.primary};
@@ -118,15 +134,16 @@ const Button = styled(motion.a)`
     }
 
     &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(108, 99, 255, 0.2);
     }
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         width: 100%;
-        min-width: unset;
-        padding: 0.875rem 1.5rem;
+        max-width: 280px;
+        padding: 0.75rem 1.5rem;
         font-size: 0.95rem;
+        min-width: unset;
     }
 `;
 
