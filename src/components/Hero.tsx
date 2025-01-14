@@ -13,9 +13,9 @@ const HeroSection = styled.section`
     padding: 80px 20px;
     
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        min-height: 100vh;
-        padding: 80px 16px;
-        align-items: flex-start;
+        min-height: calc(100vh - 60px);
+        padding: 40px 16px;
+        margin-top: 60px;
     }
 `;
 
@@ -48,9 +48,11 @@ const Title = styled(motion.h1)`
     animation: glitch 5s infinite;
     margin: 0;
     padding: 0;
+    line-height: 1.2;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        font-size: 2.5rem;
+        font-size: 3rem;
+        margin-bottom: 10px;
     }
 `;
 
@@ -65,9 +67,11 @@ const Subtitle = styled(motion.h2)`
     -webkit-text-fill-color: transparent;
     margin: 0;
     padding: 0;
+    line-height: 1.3;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        font-size: 1.75rem;
+        font-size: 2rem;
+        margin-bottom: 15px;
     }
 `;
 
