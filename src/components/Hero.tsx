@@ -10,12 +10,12 @@ const HeroSection = styled.section`
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 80px 20px;
+    padding: 60px 20px;
+    margin-top: 60px;
     
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         min-height: calc(100vh - 60px);
         padding: 40px 16px;
-        margin-top: 60px;
     }
 `;
 

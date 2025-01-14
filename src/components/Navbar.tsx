@@ -8,11 +8,15 @@ const Nav = styled(motion.nav)`
     align-items: center;
     padding: 1rem 5%;
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    z-index: 100;
+    height: 60px;
+    z-index: 1000;
     background: rgba(10, 10, 15, 0.8);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `;
 
 const Logo = styled.div`
@@ -31,6 +35,8 @@ const NavList = styled(motion.ul)<{ isOpen: boolean }>`
     display: flex;
     gap: 2rem;
     list-style: none;
+    margin: 0;
+    padding: 0;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         position: fixed;
@@ -47,6 +53,7 @@ const NavList = styled(motion.ul)<{ isOpen: boolean }>`
         transition: right 0.3s ease;
         margin: 0;
         padding: 2rem;
+        z-index: 999;
     }
 `;
 
@@ -77,7 +84,7 @@ const NavItem = styled(motion.li)`
 const MenuToggle = styled.div`
     display: none;
     cursor: pointer;
-    z-index: 101;
+    z-index: 1001;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         display: block;
