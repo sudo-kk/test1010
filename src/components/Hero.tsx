@@ -5,10 +5,9 @@ import { Container } from '../styles/StyledComponents';
 
 const HeroSection = styled.section`
     min-height: 100vh;
-    min-height: -webkit-fill-available;
     width: 100%;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     padding: 6rem 0 2rem 0;
     position: relative;
@@ -16,26 +15,9 @@ const HeroSection = styled.section`
     
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         padding: 0;
-        min-height: -webkit-fill-available;
-        height: -webkit-fill-available;
+        min-height: 100vh;
+        height: 100vh;
         align-items: flex-start;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-`;
-
-const StyledContainer = styled(Container)`
-    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        padding: 0;
-        height: 100%;
-        min-height: -webkit-fill-available;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        position: relative;
     }
 `;
 
@@ -52,15 +34,10 @@ const HeroContent = styled(motion.div)`
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         padding: 1rem;
-        height: auto;
-        min-height: -webkit-fill-available;
+        height: 100%;
         justify-content: flex-start;
         margin: 0;
-        padding-top: 5rem;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
+        padding-top: 4rem;
     }
 `;
 
@@ -74,7 +51,7 @@ const Title = styled(motion.h1)`
     white-space: nowrap;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        font-size: 1.75rem;
+        font-size: 2rem;
         line-height: 1.1;
         margin: 0 0 0.25rem 0;
         white-space: normal;
@@ -96,7 +73,7 @@ const Subtitle = styled(motion.h2)`
     white-space: nowrap;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        font-size: 1.1rem;
+        font-size: 1.25rem;
         line-height: 1.2;
         margin: 0 0 0.25rem 0;
         white-space: normal;
@@ -112,7 +89,7 @@ const TypingText = styled(motion.p)`
     padding: 0;
     
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         line-height: 1.3;
         margin: 0.25rem 0;
         padding: 0;
@@ -135,7 +112,6 @@ const ButtonContainer = styled(motion.div)`
         gap: 0.5rem;
         margin-top: 0.75rem;
         padding: 0 1rem;
-        position: relative;
     }
 `;
 
@@ -170,9 +146,9 @@ const Button = styled(motion.a)`
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         width: 100%;
-        max-width: 200px;
+        max-width: 220px;
         padding: 0.5rem 1rem;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         min-width: unset;
     }
 `;
@@ -249,7 +225,7 @@ const Hero: React.FC = () => {
 
     return (
         <HeroSection id="home">
-            <StyledContainer>
+            <Container>
                 <HeroContent
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -306,7 +282,7 @@ const Hero: React.FC = () => {
                         </Button>
                     </ButtonContainer>
                 </HeroContent>
-            </StyledContainer>
+            </Container>
         </HeroSection>
     );
 };
