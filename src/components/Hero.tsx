@@ -21,6 +21,16 @@ const HeroSection = styled.section`
     }
 `;
 
+const StyledContainer = styled(Container)`
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+        padding: 0;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+`;
+
 const HeroContent = styled(motion.div)`
     text-align: center;
     width: 100%;
@@ -37,7 +47,9 @@ const HeroContent = styled(motion.div)`
         height: 100%;
         justify-content: flex-start;
         margin: 0;
-        padding-top: 4rem;
+        padding-top: 6rem;
+        max-height: 100vh;
+        overflow-y: auto;
     }
 `;
 
@@ -225,7 +237,7 @@ const Hero: React.FC = () => {
 
     return (
         <HeroSection id="home">
-            <Container>
+            <StyledContainer>
                 <HeroContent
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -282,7 +294,7 @@ const Hero: React.FC = () => {
                         </Button>
                     </ButtonContainer>
                 </HeroContent>
-            </Container>
+            </StyledContainer>
         </HeroSection>
     );
 };
