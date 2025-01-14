@@ -10,21 +10,35 @@ const HeroSection = styled.section`
     justify-content: center;
     padding: 6rem 1rem 2rem 1rem;
     position: relative;
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+        padding: 4rem 1rem 1rem 1rem;
+        min-height: 90vh;
+    }
 `;
 
 const HeroContent = styled(motion.div)`
     text-align: center;
     width: 100%;
     max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
 `;
 
 const Title = styled(motion.h1)`
     font-size: 5rem;
     font-weight: 700;
     animation: glitch 5s infinite;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         font-size: 3rem;
+        line-height: 1.2;
     }
 `;
 
@@ -38,9 +52,13 @@ const Subtitle = styled(motion.h2)`
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 1rem 0;
+    width: 100%;
+    padding: 0;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         font-size: 2rem;
+        line-height: 1.3;
+        margin: 0.5rem 0;
     }
 `;
 
@@ -48,6 +66,15 @@ const TypingText = styled(motion.p)`
     font-size: 1.2rem;
     margin: 1rem 0;
     min-height: 1.5em;
+    width: 100%;
+    padding: 0 1rem;
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin: 0.5rem 0;
+        padding: 0 0.5rem;
+    }
 `;
 
 const ButtonContainer = styled(motion.div)`
@@ -55,10 +82,15 @@ const ButtonContainer = styled(motion.div)`
     display: flex;
     gap: 1rem;
     justify-content: center;
+    width: 100%;
+    padding: 0 1rem;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         flex-direction: column;
-        gap: 1rem;
+        align-items: stretch;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+        padding: 0 0.5rem;
     }
 `;
 
@@ -69,6 +101,10 @@ const Button = styled(motion.a)`
     font-weight: 600;
     transition: all 0.3s ease;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
 
     &.primary {
         background: ${({ theme }) => theme.colors.primary};
@@ -88,7 +124,9 @@ const Button = styled(motion.a)`
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         width: 100%;
-        text-align: center;
+        min-width: unset;
+        padding: 0.875rem 1.5rem;
+        font-size: 0.95rem;
     }
 `;
 
