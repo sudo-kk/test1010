@@ -5,12 +5,11 @@ const BackgroundContainer = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    pointer-events: auto;
-    background-color: ${({ theme }) => theme.colors.background};
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    background: transparent;
 `;
 
 const Canvas = styled.canvas`
@@ -19,7 +18,6 @@ const Canvas = styled.canvas`
     left: 0;
     width: 100%;
     height: 100%;
-    display: block;
 `;
 
 interface Particle {
@@ -52,7 +50,7 @@ const Background: React.FC = () => {
 
         const colors = ['#6C63FF', '#FF6B6B', '#4ECDC4', '#45B7D1'];
         const isMobile = window.innerWidth < 768;
-        const numberOfParticles = isMobile ? 100 : 250;
+        const numberOfParticles = isMobile ? 50 : 100;
         const glowRadius = isMobile ? 100 : 150;
         const attractRadius = isMobile ? 150 : 200;
         const attractStrength = isMobile ? 0.03 : 0.05;
@@ -60,11 +58,8 @@ const Background: React.FC = () => {
         const glowIntensity = isMobile ? 0.6 : 0.8;
 
         const resizeCanvas = () => {
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-            canvas.style.width = `${rect.width}px`;
-            canvas.style.height = `${rect.height}px`;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         };
 
         const createParticles = () => {
@@ -73,12 +68,12 @@ const Background: React.FC = () => {
                 const particle: Particle = {
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    radius: Math.random() * 1.5 + 0.5,
-                    baseRadius: Math.random() * 1.5 + 0.5,
+                    radius: Math.random() * 2 + 1,
+                    baseRadius: Math.random() * 2 + 1,
                     speedX: (Math.random() - 0.5) * 0.8,
                     speedY: (Math.random() - 0.5) * 0.8,
                     color: colors[Math.floor(Math.random() * colors.length)],
-                    alpha: Math.random() * 0.4 + 0.2,
+                    alpha: Math.random() * 0.6 + 0.3,
                     originalSpeedX: (Math.random() - 0.5) * 0.8,
                     originalSpeedY: (Math.random() - 0.5) * 0.8
                 };
@@ -129,43 +124,40 @@ const Background: React.FC = () => {
             particles.current.forEach(particle => {
                 updateParticlePosition(particle);
 
-                // Only render particles within the viewport plus a small buffer
-                if (particle.y >= scrollY - 100 && particle.y <= scrollY + window.innerHeight + 100) {
-                    let currentRadius = particle.baseRadius;
-                    let alpha = particle.alpha;
+                let currentRadius = particle.baseRadius;
+                let alpha = particle.alpha;
 
-                    if (mousePosition.current.x !== undefined && mousePosition.current.y !== undefined) {
-                        const dx = mousePosition.current.x - particle.x;
-                        const dy = (mousePosition.current.y + scrollY) - particle.y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
+                if (mousePosition.current.x !== undefined && mousePosition.current.y !== undefined) {
+                    const dx = mousePosition.current.x - particle.x;
+                    const dy = (mousePosition.current.y + scrollY) - particle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
 
-                        if (distance < glowRadius) {
-                            const glow = Math.pow(1 - (distance / glowRadius), 1.5);
-                            currentRadius = particle.baseRadius * (1 + glow * 3);
-                            alpha = Math.min(1, particle.alpha + glow * glowIntensity);
+                    if (distance < glowRadius) {
+                        const glow = Math.pow(1 - (distance / glowRadius), 1.5);
+                        currentRadius = particle.baseRadius * (1 + glow * 3);
+                        alpha = Math.min(1, particle.alpha + glow * glowIntensity);
 
-                            const gradient = ctx.createRadialGradient(
-                                particle.x, particle.y - scrollY, 0,
-                                particle.x, particle.y - scrollY, currentRadius * 2.5
-                            );
-                            gradient.addColorStop(0, `${particle.color}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`);
-                            gradient.addColorStop(0.6, `${particle.color}${Math.floor(alpha * 127).toString(16).padStart(2, '0')}`);
-                            gradient.addColorStop(1, `${particle.color}00`);
-                            
-                            ctx.fillStyle = gradient;
-                            ctx.beginPath();
-                            ctx.arc(particle.x, particle.y - scrollY, currentRadius * 2.5, 0, Math.PI * 2);
-                            ctx.fill();
-                        }
+                        const gradient = ctx.createRadialGradient(
+                            particle.x, particle.y - scrollY, 0,
+                            particle.x, particle.y - scrollY, currentRadius * 2.5
+                        );
+                        gradient.addColorStop(0, `${particle.color}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`);
+                        gradient.addColorStop(0.6, `${particle.color}${Math.floor(alpha * 127).toString(16).padStart(2, '0')}`);
+                        gradient.addColorStop(1, `${particle.color}00`);
+                        
+                        ctx.fillStyle = gradient;
+                        ctx.beginPath();
+                        ctx.arc(particle.x, particle.y - scrollY, currentRadius * 2.5, 0, Math.PI * 2);
+                        ctx.fill();
                     }
-
-                    ctx.globalAlpha = alpha;
-                    ctx.fillStyle = particle.color;
-                    ctx.beginPath();
-                    ctx.arc(particle.x, particle.y - scrollY, currentRadius, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.globalAlpha = 1;
                 }
+
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = particle.color;
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y - scrollY, currentRadius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
             });
 
             animationFrameId.current = requestAnimationFrame(animate);
@@ -232,11 +224,11 @@ const Background: React.FC = () => {
         // Event listeners
         window.addEventListener('resize', resizeCanvas);
         window.addEventListener('scroll', handleScroll, { passive: true });
-        canvas.addEventListener('mousemove', handleMouseMove);
-        canvas.addEventListener('mouseleave', handleMouseLeave);
-        canvas.addEventListener('touchstart', handleTouchStart);
-        canvas.addEventListener('touchmove', handleTouchMove);
-        canvas.addEventListener('touchend', handleTouchEnd);
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseleave', handleMouseLeave);
+        window.addEventListener('touchstart', handleTouchStart, { passive: true });
+        window.addEventListener('touchmove', handleTouchMove, { passive: true });
+        window.addEventListener('touchend', handleTouchEnd);
 
         return () => {
             if (animationFrameId.current) {
@@ -244,11 +236,11 @@ const Background: React.FC = () => {
             }
             window.removeEventListener('resize', resizeCanvas);
             window.removeEventListener('scroll', handleScroll);
-            canvas.removeEventListener('mousemove', handleMouseMove);
-            canvas.removeEventListener('mouseleave', handleMouseLeave);
-            canvas.removeEventListener('touchstart', handleTouchStart);
-            canvas.removeEventListener('touchmove', handleTouchMove);
-            canvas.removeEventListener('touchend', handleTouchEnd);
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseleave', handleMouseLeave);
+            window.removeEventListener('touchstart', handleTouchStart);
+            window.removeEventListener('touchmove', handleTouchMove);
+            window.removeEventListener('touchend', handleTouchEnd);
         };
     }, []);
 
