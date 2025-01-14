@@ -24,21 +24,47 @@ const StyledContainer = styled(Container)`
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    gap: 2rem;
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+        flex-direction: column;
+        gap: 3rem;
+    }
 `;
 
 const HeroContent = styled(motion.div)`
     width: 100%;
-    max-width: 800px;
-    text-align: center;
+    max-width: 600px;
+    text-align: left;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         gap: 16px;
+        align-items: center;
+        text-align: center;
+    }
+`;
+
+const GifContainer = styled(motion.div)`
+
+    border-radius: 20px;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: fit;
+    }
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+        width: 0px;
+        height: 0px;
     }
 `;
 
@@ -212,8 +238,8 @@ const Hero: React.FC = () => {
         <HeroSection id="home">
             <StyledContainer>
                 <HeroContent
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
                 >
                     <Title
@@ -267,6 +293,13 @@ const Hero: React.FC = () => {
                         </Button>
                     </ButtonContainer>
                 </HeroContent>
+                <GifContainer
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                    <img src="https://i.gifer.com/QHG.gif" alt="Animated GIF" />
+                </GifContainer>
             </StyledContainer>
         </HeroSection>
     );
