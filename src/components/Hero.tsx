@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { portfolioData } from '../utils/data';
 import { Container } from '../styles/StyledComponents';
 
 const HeroSection = styled.section`
