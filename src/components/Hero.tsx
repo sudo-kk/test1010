@@ -100,12 +100,29 @@ const Hero: React.FC = () => {
         "The first computer virus was created in 1983",
         "The term 'bug' originated from an actual moth in a computer",
         "The average cost of a data breach is $3.86 million",
-        "There's a new cyber attack every 39 seconds"
+        "There's a new cyber attack every 39 seconds",
+        "Cyberattacks are increasing globally, affecting individuals and organizations.",
+        "Phishing tricks people into revealing sensitive personal information.",
+        "Strong passwords and 2FA improve online account security.",
+        "Public Wi-Fi risks hacking and data theft vulnerabilities.",
+        "Software updates fix security flaws to block threats.",
+        "Social engineering manipulates victims to access confidential data.",
+        "Ransomware locks data, demanding payment for decryption keys.",
+        "Data breaches expose sensitive information, risking identity theft.",
+        "Did you know 90% of cyberattacks start with phishing?",
+        "Can you imagine how quickly your data can be stolen online?",
+        "What if your personal data is already on the dark web?",
+        "Have you ever wondered who’s watching your online activity?",
+        "Did you know hackers can breach your device through Wi-Fi?",
+        "Could a simple email cost you millions in damages?",
+        "What if your smartphone has been compromised without you knowing?",
+        "Do you realize how vulnerable your online accounts truly are?"
+
     ];
     const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
-    const typingSpeed = 50;
-    const deletingSpeed = 30;
+    const typingSpeed = 30;
+    const deletingSpeed = 5;
     const pauseTime = 2000;
 
     useEffect(() => {
@@ -116,23 +133,23 @@ const Hero: React.FC = () => {
             
             if (!isDeleting) {
                 if (displayText !== currentPhrase) {
-                    // Typing
                     timeout = setTimeout(() => {
                         setDisplayText(currentPhrase.slice(0, displayText.length + 1));
                     }, typingSpeed);
                 } else {
-                    // Pause before deleting
                     timeout = setTimeout(() => {
                         setIsDeleting(true);
                     }, pauseTime);
                 }
             } else {
                 if (displayText === '') {
-                    // Move to next phrase
                     setIsDeleting(false);
-                    setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+                    let nextIndex;
+                    do {
+                        nextIndex = Math.floor(Math.random() * phrases.length);
+                    } while (nextIndex === currentPhraseIndex);
+                    setCurrentPhraseIndex(nextIndex);
                 } else {
-                    // Deleting
                     timeout = setTimeout(() => {
                         setDisplayText(displayText.slice(0, -1));
                     }, deletingSpeed);
