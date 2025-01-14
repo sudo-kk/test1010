@@ -11,13 +11,11 @@ const HeroSection = styled.section`
     justify-content: center;
     position: relative;
     padding: 80px 20px;
-    box-sizing: border-box;
     
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         min-height: 100vh;
         padding: 80px 16px;
         align-items: flex-start;
-        justify-content: flex-start;
     }
 `;
 
@@ -26,10 +24,8 @@ const StyledContainer = styled(Container)`
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
 `;
 
 const HeroContent = styled(motion.div)`
@@ -40,11 +36,9 @@ const HeroContent = styled(motion.div)`
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    box-sizing: border-box;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         gap: 16px;
-        padding: 0 10px;
     }
 `;
 
@@ -54,7 +48,6 @@ const Title = styled(motion.h1)`
     animation: glitch 5s infinite;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         font-size: 2.5rem;
@@ -72,7 +65,6 @@ const Subtitle = styled(motion.h2)`
     -webkit-text-fill-color: transparent;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         font-size: 1.75rem;
@@ -86,7 +78,6 @@ const TypingText = styled(motion.p)`
     padding: 0;
     min-height: 3em;
     max-width: 600px;
-    box-sizing: border-box;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         font-size: 1rem;
@@ -98,7 +89,6 @@ const ButtonContainer = styled(motion.div)`
     display: flex;
     gap: 20px;
     margin-top: 10px;
-    box-sizing: border-box;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         flex-direction: column;
@@ -120,7 +110,6 @@ const Button = styled(motion.a)`
     align-items: center;
     justify-content: center;
     min-width: 150px;
-    box-sizing: border-box;
 
     &.primary {
         background: ${({ theme }) => theme.colors.primary};
@@ -165,7 +154,7 @@ const Hero: React.FC = () => {
         "Did you know 90% of cyberattacks start with phishing?",
         "Can you imagine how quickly your data can be stolen online?",
         "What if your personal data is already on the dark web?",
-        "Have you ever wondered who’s watching your online activity?",
+        "Have you ever wondered who's watching your online activity?",
         "Did you know hackers can breach your device through Wi-Fi?",
         "Could a simple email cost you millions in damages?",
         "What if your smartphone has been compromised without you knowing?",
