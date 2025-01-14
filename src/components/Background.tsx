@@ -50,7 +50,7 @@ const Background: React.FC = () => {
 
         const colors = ['#6C63FF', '#FF6B6B', '#4ECDC4', '#45B7D1'];
         const isMobile = window.innerWidth < 768;
-        const numberOfParticles = isMobile ? 50 : 100;
+        const numberOfParticles = isMobile ? 300 : 500;
         const glowRadius = isMobile ? 100 : 150;
         const attractRadius = isMobile ? 150 : 200;
         const attractStrength = isMobile ? 0.03 : 0.05;
