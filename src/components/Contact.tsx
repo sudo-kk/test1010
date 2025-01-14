@@ -6,6 +6,11 @@ import { Container, GlassCard } from '../styles/StyledComponents';
 const ContactSection = styled.section`
     padding: 5rem 0;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 `;
 
 const SectionTitle = styled(motion.h2)`
@@ -14,32 +19,45 @@ const SectionTitle = styled(motion.h2)`
     font-size: 2.5rem;
 `;
 
+const StyledContainer = styled(Container)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;
+
 const SocialGrid = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    max-width: 800px;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    gap: 1rem;
+    max-width: 700px;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 0.5rem;
+    justify-content: center;
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+        grid-template-columns: 1fr;
+        width: 90%;
+    }
 `;
 
 const SocialCard = styled(GlassCard)`
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1.5rem;
+    gap: 0.8rem;
+    padding: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-5px);
+        transform: translateY(-3px);
     }
 
     .icon {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         color: ${({ theme }) => theme.colors.primary};
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -52,12 +70,12 @@ const SocialCard = styled(GlassCard)`
 
     .text {
         h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
         }
 
         p {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             opacity: 0.8;
         }
     }
@@ -109,7 +127,7 @@ const Contact: React.FC = () => {
 
     return (
         <ContactSection id="contact">
-            <Container>
+            <StyledContainer>
                 <SectionTitle
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -140,7 +158,7 @@ const Contact: React.FC = () => {
                         </motion.a>
                     ))}
                 </SocialGrid>
-            </Container>
+            </StyledContainer>
         </ContactSection>
     );
 };
