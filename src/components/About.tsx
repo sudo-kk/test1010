@@ -100,7 +100,7 @@ const About: React.FC = () => {
                     <AboutText>
                         <h3>Student Coder & Cybersecurity Enthusiast</h3>
                         <p>
-                            Hi there! I'm Karthik V K, a passionate student coder and cybersecurity enthusiast. 
+                            Hi there! I'm Karthik V K, a passionate student coder and cybersecurity enthusiast.
                             I create projects like phishing awareness tools and a plant disease identification website.
                         </p>
                         <p>
