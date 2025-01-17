@@ -2,25 +2,30 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Nav = styled(motion.nav)`
+const NavbarContainer = styled(motion.nav)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
+    padding: 0.8rem 10%;
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
     width: 100%;
-    height: 60px;
+    height: 70px;
     z-index: 1000;
-    background: rgba(10, 10, 15, 0.8);
+    background: rgba(10, 10, 15, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+        padding: 0.8rem 5%;
+    }
 `;
 
 const Logo = styled.div`
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     background: linear-gradient(45deg, 
         ${({ theme }) => theme.colors.primary}, 
@@ -29,14 +34,26 @@ const Logo = styled.div`
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-right: auto;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+        font-size: 1.5rem;
+    }
 `;
 
 const NavList = styled(motion.ul)<{ isOpen: boolean }>`
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
     list-style: none;
     margin: 0;
     padding: 0;
+    align-items: center;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         position: fixed;
@@ -54,6 +71,7 @@ const NavList = styled(motion.ul)<{ isOpen: boolean }>`
         margin: 0;
         padding: 2rem;
         z-index: 999;
+        gap: 2rem;
     }
 `;
 
@@ -63,6 +81,8 @@ const NavItem = styled(motion.li)`
         text-decoration: none;
         position: relative;
         padding: 0.5rem;
+        font-size: 1rem;
+        font-weight: 500;
 
         &::after {
             content: '';
@@ -85,6 +105,7 @@ const MenuToggle = styled.div`
     display: none;
     cursor: pointer;
     z-index: 1001;
+    margin-left: 1rem;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         display: block;
@@ -100,6 +121,7 @@ const MenuToggle = styled.div`
 const navItems = [
     { title: 'Home', href: '#home' },
     { title: 'About', href: '#about' },
+    { title: 'Projects', href: '#projects' },
     { title: 'Skills', href: '#skills' },
     { title: 'Contact', href: '#contact' },
 ];
@@ -116,12 +138,19 @@ const Navbar: React.FC = () => {
     };
 
     return (
-        <Nav
+        <NavbarContainer
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 20,
+                delay: 0.2
+            }}
         >
-            <Logo>Portfolio</Logo>
+            <Logo onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                sudo_kk
+            </Logo>
             <MenuToggle onClick={toggleMenu} className="no-select">
                 <svg viewBox="0 0 100 100">
                     <rect width="80" height="10" x="10" y="25" rx="5" />
@@ -134,9 +163,15 @@ const Navbar: React.FC = () => {
                     {navItems.map((item, index) => (
                         <NavItem
                             key={item.href}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.1 }}
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ 
+                                delay: index * 0.1,
+                                type: "spring",
+                                stiffness: 100
+                            }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                         >
                             <a href={item.href} onClick={closeMenu}>
                                 {item.title}
@@ -145,7 +180,7 @@ const Navbar: React.FC = () => {
                     ))}
                 </NavList>
             </AnimatePresence>
-        </Nav>
+        </NavbarContainer>
     );
 };
 

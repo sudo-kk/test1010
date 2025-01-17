@@ -5,16 +5,15 @@ import { Container } from '../styles/StyledComponents';
 
 const HeroSection = styled.section`
     width: 100%;
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     padding: 40px 20px;
-    margin-top: 60px;
     
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        min-height: calc(90vh - 60px);
+        min-height: calc(100vh - 70px);
         padding: 30px 16px;
     }
 `;
@@ -50,8 +49,19 @@ const HeroContent = styled(motion.div)`
     }
 `;
 
-const GifContainer = styled(motion.div)`
+const floatingAnimation = {
+    initial: { y: 0 },
+    animate: {
+        y: [-15, 15, -15],
+        transition: {
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+        }
+    }
+};
 
+const GifContainer = styled(motion.div)`
     border-radius: 20px;
     overflow: hidden;
     flex-shrink: 0;
@@ -164,6 +174,29 @@ const Button = styled(motion.a)`
     }
 `;
 
+const containerVariants = {
+    initial: { opacity: 0 },
+    animate: {
+        opacity: 1,
+        transition: {
+            duration: 0.3,
+            staggerChildren: 0.15
+        }
+    }
+};
+
+const itemVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.5,
+            ease: "easeOut"
+        }
+    }
+};
+
 const Hero: React.FC = () => {
     const [displayText, setDisplayText] = useState('');
     const phrases = [
@@ -236,40 +269,50 @@ const Hero: React.FC = () => {
 
     return (
         <HeroSection id="home">
-            <StyledContainer>
+            <StyledContainer
+                variants={containerVariants}
+                initial="initial"
+                animate="animate"
+            >
                 <HeroContent
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <Title
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        sudo_kk
-                    </Title>
-                    <Subtitle
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                    >
-                        Techie & Cyber Expert
-                    </Subtitle>
-                    <TypingText
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6 }}
-                    >
-                        {displayText}
-                        <motion.span
-                            animate={{ opacity: [1, 0] }}
-                            transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
-                            style={{ display: 'inline-block', marginLeft: '2px', borderRight: '2px solid currentColor' }}
+                    <motion.div variants={itemVariants}>
+                        <Title
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.2 }}
                         >
-                            &nbsp;
-                        </motion.span>
-                    </TypingText>
+                            sudo_kk
+                        </Title>
+                    </motion.div>
+                    <motion.div variants={itemVariants}>
+                        <Subtitle
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.4 }}
+                        >
+                            Techie & Cyber Expert
+                        </Subtitle>
+                    </motion.div>
+                    <motion.div variants={itemVariants}>
+                        <TypingText
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.6 }}
+                        >
+                            {displayText}
+                            <motion.span
+                                animate={{ opacity: [1, 0] }}
+                                transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
+                                style={{ display: 'inline-block', marginLeft: '2px', borderRight: '2px solid currentColor' }}
+                            >
+                                &nbsp;
+                            </motion.span>
+                        </TypingText>
+                    </motion.div>
                     <ButtonContainer
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -295,8 +338,21 @@ const Hero: React.FC = () => {
                 </HeroContent>
                 <GifContainer
                     initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
+                    animate={{ 
+                        opacity: 1, 
+                        x: 0,
+                        y: [-15, 15, -15]
+                    }}
+                    transition={{ 
+                        opacity: { duration: 0.8, delay: 0.4 },
+                        x: { duration: 0.8, delay: 0.4 },
+                        y: {
+                            duration: 8,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            repeatType: "reverse"
+                        }
+                    }}
                 >
                     <img src="https://i.gifer.com/QHG.gif" alt="Animated GIF" />
                 </GifContainer>
