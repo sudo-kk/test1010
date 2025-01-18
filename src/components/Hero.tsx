@@ -18,7 +18,7 @@ const HeroSection = styled.section`
     }
 `;
 
-const StyledContainer = styled(Container)`
+const StyledContainer = styled(motion(Container))`
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -48,18 +48,6 @@ const HeroContent = styled(motion.div)`
         text-align: center;
     }
 `;
-
-const floatingAnimation = {
-    initial: { y: 0 },
-    animate: {
-        y: [-15, 15, -15],
-        transition: {
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-        }
-    }
-};
 
 const GifContainer = styled(motion.div)`
     border-radius: 20px;

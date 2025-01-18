@@ -72,7 +72,7 @@ const Welcome: React.FC<WelcomeProps> = ({ onComplete }) => {
         let currentIndex = 0;
         const typingInterval = setInterval(() => {
             if (currentIndex < fullText.length) {
-                setTypedText(prev => prev + fullText[currentIndex]);
+                setTypedText(fullText.slice(0, currentIndex + 1));
                 currentIndex++;
             } else {
                 clearInterval(typingInterval);
@@ -85,7 +85,7 @@ const Welcome: React.FC<WelcomeProps> = ({ onComplete }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             onComplete();
-        }, 1200);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, [onComplete]);
