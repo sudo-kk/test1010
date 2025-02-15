@@ -2,6 +2,6 @@
   "name": "test1010",
   "version": "1.0.0",
   "scripts": {
-    "build": "echo 'No build required - static site'"
+    "build": "cp -r public/* dist/"
   }
 }
