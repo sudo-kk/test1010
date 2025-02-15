@@ -1,0 +1,5 @@
+# Static HTML site configuration
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
