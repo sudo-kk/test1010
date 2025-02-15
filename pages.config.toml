@@ -1,4 +1,0 @@
-# Skip npm build and deploy as a static site
-[build]
-command = ""
-publish = "public"
