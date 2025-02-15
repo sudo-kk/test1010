@@ -1,3 +1,0 @@
-# Skip build step, use static HTML directly
-[build]
-  skip_processing = true
