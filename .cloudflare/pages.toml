@@ -1,4 +1,9 @@
+# Build configuration for Cloudflare Pages
+build.environment = { NODE_VERSION = "18" }
+
 [build]
 command = ""
+# Specify the directory containing static assets
+output_directory = "public"
 publish = "public"
 base = "/"
