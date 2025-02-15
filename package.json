@@ -1,0 +1,9 @@
+{
+  "name": "test1010",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "mkdir -p dist && cp -r index.html _headers _redirects dist/"
+  }
+}
